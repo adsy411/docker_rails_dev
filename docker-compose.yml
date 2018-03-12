@@ -1,0 +1,24 @@
+# shell container so you can run stuff
+shell:
+  build: .
+
+  # be able to connect
+  stdin_open: true
+  tty: true
+  command: /bin/bash
+
+  # local folder to container folder
+  volumes:
+    - ~/dev:/apps
+
+  # ports so you can localhost:3000
+  ports:
+    - "3000:3000"
+  links:
+    - postgres
+
+# Database
+postgres:
+  image: postgres:9.4
+  ports:
+    - "5432"
